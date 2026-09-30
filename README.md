@@ -50,7 +50,7 @@ The dashboard displays:
 
 ```bash
 git clone https://github.com/grifsecurity-max/nist-csf2-tracker.git
-cd nist-csf-tracker
+cd nist-csf2-tracker
 ```
 
 ### 2. Run the Startup Script
