@@ -74,6 +74,39 @@ Open your browser and navigate to:
 http://localhost:5001
 ```
 
+## Docker Deployment
+
+The easiest way to run the tracker is with Docker:
+
+```bash
+docker build -t nist-csf-tracker .
+docker run -d -p 5001:5001 --name csf-tracker nist-csf-tracker
+```
+
+Then open `http://localhost:5001`.
+
+### Persistence
+
+The app uses a SQLite database in `data/` (seeded with the NIST CSF core catalog).
+To persist score changes and overrides across container updates, mount a volume:
+
+```bash
+docker run -d -p 5001:5001 -v csf-data:/app/data --name csf-tracker nist-csf-tracker
+```
+
+### Configuration
+
+| Environment Variable | Default | Description |
+|----------------------|---------|-------------|
+| `PORT` | `5001` | Port the server listens on |
+| `SECRET_KEY` | random | Flask session secret — set a fixed value to keep logins across restarts |
+
+Example with a custom port:
+
+```bash
+docker run -d -p 8080:8080 -e PORT=8080 --name csf-tracker nist-csf-tracker
+```
+
 ## Manual Installation
 
 If you prefer to set up manually:
